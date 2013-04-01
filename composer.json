@@ -1,0 +1,21 @@
+{
+	"name": "sumocoders/sumo-fork-class",
+	"type": "library",
+	"description": "Fork is great, but we like to implemented our internal tools into the website we create for our clients",
+	"homepage": "https://github.com/sumocoders/Sumo-specific-Fork-stuff",
+	"license": "BSD",
+	"authors": [
+		{
+			"name": "Tijs Verkoyen",
+			"email": "tijs@sumocoders.be",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0"
+	},
+	"target-dir": "SumoCoders/SumoForkClass",
+	"autoload": {
+		"psr-0": {"SumoCoders\\SumoForkClass": ""}
+	}
+}
