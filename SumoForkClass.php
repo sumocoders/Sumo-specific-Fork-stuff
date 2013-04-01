@@ -27,6 +27,15 @@ class SumoForkClass
 	{
 		$this->container = $container;
 	}
+
+	/**
+	 * Init method
+	 */
+	public function init()
+	{
+		$this->initErrbit();
+	}
+
 	/**
 	 * Initialize Errbit
 	 */
