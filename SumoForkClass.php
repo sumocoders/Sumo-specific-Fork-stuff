@@ -11,6 +11,20 @@ class SumoForkClass
      */
     private $container;
 
+	/**
+	 * Debug-mode?
+	 *
+	 * @var bool
+	 */
+	private $debug = false;
+
+	/**
+	 * Errbit Api key
+	 *
+	 * @var string
+	 */
+	private $errbitApiKey;
+
     /**
      * @return ContainerInterface
      */
@@ -19,13 +33,45 @@ class SumoForkClass
         return $this->container;
     }
 
-    /**
-     * @param ContainerInterface[optional] $container
-     */
+	/**
+	 * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+	 */
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
+
+	/**
+	 * @param boolean $debug
+	 */
+	public function setDebug($debug)
+	{
+		$this->debug = $debug;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getDebug()
+	{
+		return $this->debug;
+	}
+
+	/**
+	 * @param string $errbitApiKey
+	 */
+	public function setErrbitApiKey($errbitApiKey)
+	{
+		$this->errbitApiKey = $errbitApiKey;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getErrbitApiKey()
+	{
+		return $this->errbitApiKey;
+	}
 
     /**
      * Init method
@@ -40,24 +86,26 @@ class SumoForkClass
      */
     public function initErrbit()
     {
-        try {
-            $debug = $this->getContainer()->getParameter('fork.debug');
-            $errbitApiKey = $this->getContainer()->getParameter('sumo.errbit_api_key');
+	    if(!$this->errbitApiKey && $this->container) {
+		    try {
+			    $this->debug = $this->getContainer()->getParameter('fork.debug');
+			    $this->errbitApiKey = $this->getContainer()->getParameter('sumo.errbit_api_key')
+	        } catch (\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
+			    // do nothing
+		    }
+	    }
 
-            // only activate the error handler when we aren't in debug-mode and an api key is provided
-            if (!$debug && $errbitApiKey != '') {
-                \Errbit::instance()->configure(
-                    array(
-                        'api_key' => $errbitApiKey,
-                        'host' => 'errors.sumocoders.be',
-                        'secure' => true,
-                        'port' => 443,
-                    )
-                );
-                new Errbit\ErrorHandler();
-            }
-        } catch (\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
-            // do nothing
+        // only activate the error handler when we aren't in debug-mode and an api key is provided
+        if (!$this->debug && $this->errbitApiKey != '') {
+            \Errbit::instance()->configure(
+                array(
+                    'api_key' => $this->errbitApiKey,
+                    'host' => 'errors.sumocoders.be',
+                    'secure' => true,
+                    'port' => 443,
+                )
+            );
+            new Errbit\ErrorHandler();
         }
-    }
+	}
 }
