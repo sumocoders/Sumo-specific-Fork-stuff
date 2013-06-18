@@ -23,14 +23,16 @@ class ErrorHandler
      */
     public function onError($code, $message, $file, $line)
     {
-        $exception = new Error(
-            $message,
-            $file,
-            $line,
-            debug_backtrace()
-        );
-        $this->notify($exception);
-        $this->showNiceError();
+        if (error_reporting()) {
+            $exception = new Error(
+                $message,
+                $file,
+                $line,
+                debug_backtrace()
+            );
+            $this->notify($exception);
+            $this->showNiceError();
+        }
     }
 
     /**
