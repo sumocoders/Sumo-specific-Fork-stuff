@@ -103,6 +103,7 @@ class SumoForkClass
                     'host' => 'errors.sumocoders.be',
                     'secure' => true,
                     'port' => 443,
+                    'environment_name' => 'production'
                 )
             );
             new Errbit\ErrorHandler();
