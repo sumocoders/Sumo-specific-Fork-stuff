@@ -89,9 +89,9 @@ class SumoForkClass
         if (!$this->errbitApiKey && $this->container) {
             try {
                 if ($this->getContainer()->hasParameter('kernel.debug')) {
-                    $debug = $this->getContainer()->getParameter('kernel.debug');
+                    $this->debug = $this->getContainer()->getParameter('kernel.debug');
                 } else {
-                    $debug = $this->getContainer()->hasParameter('fork.debug');
+                    $this->debug = $this->getContainer()->hasParameter('fork.debug');
                 }
                 $this->errbitApiKey = $this->getContainer()->getParameter('sumo.errbit_api_key');
             } catch (\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
