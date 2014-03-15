@@ -26,6 +26,13 @@ class SumoForkClass
     private $errbitApiKey;
 
     /**
+     * Should we ignore the notification on shutdown?
+     *
+     * @var bool
+     */
+    private $errbitIgnoreShutdown = false;
+
+    /**
      * @return ContainerInterface
      */
     public function getContainer()
@@ -74,6 +81,22 @@ class SumoForkClass
     }
 
     /**
+     * @param boolean $errbitIgnoreShutdown
+     */
+    public function setErrbitIgnoreShutdown($errbitIgnoreShutdown)
+    {
+        $this->errbitIgnoreShutdown = $errbitIgnoreShutdown;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getErrbitIgnoreShutdown()
+    {
+        return $this->errbitIgnoreShutdown;
+    }
+
+    /**
      * Init method
      */
     public function init()
@@ -110,7 +133,7 @@ class SumoForkClass
                     'environment_name' => 'production'
                 )
             );
-            new Errbit\ErrorHandler();
+            new Errbit\ErrorHandler($this->getErrbitIgnoreShutdown());
         }
     }
 }

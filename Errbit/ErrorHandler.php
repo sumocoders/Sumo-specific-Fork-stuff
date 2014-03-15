@@ -6,11 +6,11 @@ class ErrorHandler
     /**
      * Set the error handlers
      */
-    public function __construct()
+    public function __construct($disableShutdown = false)
     {
         set_error_handler(array($this, 'onError'), error_reporting());
         set_exception_handler(array($this, 'onException'));
-        register_shutdown_function(array($this, 'onShutdown'));
+        if(!$disableShutdown) register_shutdown_function(array($this, 'onShutdown'));
     }
 
     /**
