@@ -117,7 +117,7 @@ class SumoForkClass
                     $this->debug = $this->getContainer()->hasParameter('fork.debug');
                 }
                 $this->errbitApiKey = $this->getContainer()->getParameter('sumo.errbit_api_key');
-            } catch (\Symfony\Component\DependencyInjection\Exception\ParameterNotFoundException $e) {
+            } catch (\Symfony\Component\DependencyInjection\Exception\InvalidArgumentException $e) {
                 // do nothing
             }
         }
