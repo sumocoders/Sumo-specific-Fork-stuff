@@ -13,7 +13,7 @@
 	],
 	"require": {
 		"php": ">=5.3.0",
-		"flippa-official/errbit-php": "dev-master"
+		"flippa-official/errbit-php": "dev-master#b432716d29c2b4ada0f21ccc469ccb046bb60340"
 	},
 	"target-dir": "SumoCoders/SumoForkClass",
 	"autoload": {
