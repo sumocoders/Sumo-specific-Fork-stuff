@@ -88,6 +88,7 @@ class ErrorHandler
      */
     private function showNiceError()
     {
+        http_response_code(500);
         // build HTML for nice error
         $html = '<!doctype html>
                  <html lang="en">
