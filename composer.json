@@ -3,7 +3,7 @@
 	"type": "library",
 	"description": "Fork is great, but we like to implemented our internal tools into the website we create for our clients",
 	"homepage": "https://github.com/sumocoders/Sumo-specific-Fork-stuff",
-	"license": "BSD",
+	"license": "BSD-2-Clause",
 	"authors": [
 		{
 			"name": "Tijs Verkoyen",
